@@ -113,7 +113,8 @@ module ActionView #:nodoc:
   module Helpers #:nodoc:
     module TagHelper #:nodoc:
       def public_tag_options(options, escape = true) #:nodoc:
-        if respond_to?(:tag_options)
+        # errors with rails 4.2.8
+        if !defined?(tag_builder) || respond_to?(:tag_options)
           tag_options(options, escape)
         else
           # Rails 5.1 uses TagBuilder
